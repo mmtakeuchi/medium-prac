@@ -1,0 +1,17 @@
+.App {
+  margin: auto;
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+input {
+  margin: 10px 0;
+}
+
+ul {
+  padding: 0;
+  text-align: left;
+}
