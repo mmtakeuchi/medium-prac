@@ -1,15 +1,35 @@
 import React, { useState } from 'react';
 
-const Input = () => {
-  const [task, setTask] = useState('');
+const Input = ({ addNewItem }) => {
+  const [item, setItem] = useState('');
   const [price, setPrice] = useState('');
 
+  const submitNewItem = (e) => {
+    e.preventDefault();
+    const newItem = { name: item, value: Number(price) };
+    addNewItem(newItem);
+    setItem('');
+    setPrice('');
+  };
+
   return (
-    <div>
-      <input type="text" />
-      <input type="number" />
+    <form onSubmit={submitNewItem}>
+      <input
+        type="text"
+        required
+        value={item}
+        onChange={(e) => setItem(e.target.value)}
+      />
+      <input
+        type="number"
+        required
+        min={0}
+        step={0.01}
+        value={price}
+        onChange={(e) => setPrice(e.target.value)}
+      />
       <button type="submit">Submit</button>
-    </div>
+    </form>
   );
 };
 

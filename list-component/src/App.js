@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Input from './components/Input';
 import ItemValueList from './components/ItemValueList';
 import './App.css';
 
@@ -9,7 +10,25 @@ const INITIAL_LIST = [
 ];
 
 function App() {
-  return <ItemValueList />;
+  const [items, setItems] = useState(INITIAL_LIST);
+
+  const addNewItem = (newItem) => {
+    setItems((prevState) => [...prevState, newItem]);
+  };
+
+  const deleteItem = (selectedItem) => {
+    const remainingItems = items.filter(
+      (item) => item.name !== selectedItem.name
+    );
+    setItems(remainingItems);
+  };
+
+  return (
+    <div className="App">
+      <Input addNewItem={addNewItem} />
+      <ItemValueList items={items} deleteItem={deleteItem} />
+    </div>
+  );
 }
 
 export default App;
