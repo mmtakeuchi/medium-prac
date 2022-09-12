@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import CombinationLock from './components/CombinationLock';
 
 function App() {
   const unlockedScreen = () => (
@@ -9,9 +10,5 @@ function App() {
     <CombinationLock combination={[1, 2, 3, 4]} NextScreen={unlockedScreen} />
   );
 }
-
-const CombinationLock = ({ combination, NextScreen }) => {
-  // YOUR CODE HERE
-};
 
 export default App;
