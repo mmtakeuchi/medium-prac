@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import CombinationLock from './components/CombinationLock';
+import './App.css';
 
 function App() {
   const unlockedScreen = () => (
