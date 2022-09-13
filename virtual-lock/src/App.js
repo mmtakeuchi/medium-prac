@@ -3,13 +3,7 @@ import CombinationLock from './components/CombinationLock';
 import './App.css';
 
 function App() {
-  const unlockedScreen = () => (
-    <div style={{ textAlign: 'center' }}>You are logged in</div>
-  );
-
-  return (
-    <CombinationLock combination={[1, 2, 3, 4]} NextScreen={unlockedScreen} />
-  );
+  return <CombinationLock combination={[1, 2, 3, 4]} />;
 }
 
 export default App;
