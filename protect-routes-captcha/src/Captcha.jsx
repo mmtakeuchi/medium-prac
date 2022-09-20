@@ -1,77 +1,56 @@
-import React, { useState } from 'react';
-import UnlockedScreen from './UnlockedScreen';
+import React, { useState, useEffect } from 'react';
 
-const Captcha = ({ combination }) => {
-  const [enteredCode, setEnteredCode] = useState([]);
-  const [loggedIn, setLoggedIn] = useState(false);
+const ONE =
+  'https://images.pexels.com/photos/2249528/pexels-photo-2249528.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
+const TWO =
+  'https://images.pexels.com/photos/1061141/pexels-photo-1061141.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
+const THREE =
+  'https://images.pexels.com/photos/2249530/pexels-photo-2249530.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
+const FOUR =
+  'https://images.pexels.com/photos/1061139/pexels-photo-1061139.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
+const FIVE =
+  'https://images.pexels.com/photos/1010973/pexels-photo-1010973.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
+const SIX =
+  'https://images.pexels.com/photos/4772874/pexels-photo-4772874.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
 
-  const combinationsMatch = (combo) => {
-    for (let i = 0; i < combination.length; i++) {
-      if (combination[i] !== combo[i]) return false;
-    }
+const Captcha = ({ setUnlocked }) => {
+  const [answer, setAnswer] = useState(0);
 
-    return true;
-  };
-
-  const handleCodeInput = (e) => {
-    const newCode = [...enteredCode, Number(e.target.value)];
-    setEnteredCode(newCode);
-
-    if (newCode.length === 4) {
-      if (combinationsMatch(newCode)) {
-        setLoggedIn(true);
-        setEnteredCode([]);
-      } else {
-        setEnteredCode([]);
-        alert('Incorrect Combination');
-      }
+  const checkAnswer = (choice) => {
+    if (choice === answer) {
+      setUnlocked(true);
+    } else {
+      alert('Wrong answer!');
     }
   };
+
+  useEffect(() => {
+    setAnswer(Math.floor(Math.random() * 5 + 1));
+  }, []);
 
   return (
-    <div className="lock-container">
-      {loggedIn ? (
-        <UnlockedScreen setLoggedIn={setLoggedIn} />
-      ) : (
-        <>
-          <div className="code-display">{enteredCode.join('')}</div>
-          <div className="buttons-container">
-            <button type="button" value="1" onClick={handleCodeInput}>
-              1
-            </button>
-            <button type="button" value="2" onClick={handleCodeInput}>
-              2
-            </button>
-            <button type="button" value="3" onClick={handleCodeInput}>
-              3
-            </button>
-
-            <button type="button" value="4" onClick={handleCodeInput}>
-              4
-            </button>
-            <button type="button" value="5" onClick={handleCodeInput}>
-              5
-            </button>
-            <button type="button" value="6" onClick={handleCodeInput}>
-              6
-            </button>
-
-            <button type="button" value="7" onClick={handleCodeInput}>
-              7
-            </button>
-            <button type="button" value="8" onClick={handleCodeInput}>
-              8
-            </button>
-            <button type="button" value="9" onClick={handleCodeInput}>
-              9
-            </button>
-
-            <button type="button" value="0" onClick={handleCodeInput}>
-              0
-            </button>
-          </div>
-        </>
-      )}
+    <div className="App">
+      <p>Select {answer}</p>
+      <div className="captcha-container">
+        <button onClick={() => checkAnswer(1)}>
+          <img src={ONE} alt="one" />
+        </button>
+        <button onClick={() => checkAnswer(2)}>
+          <img src={TWO} alt="two" />
+        </button>
+        <button onClick={() => checkAnswer(3)}>
+          <img src={THREE} alt="three" />
+        </button>
+        <button onClick={() => checkAnswer(4)}>
+          <img src={FOUR} alt="four" />
+        </button>
+        <button onClick={() => checkAnswer(5)}>
+          <img src={FIVE} alt="five" />
+        </button>
+        <button onClick={() => checkAnswer(6)}>
+          <img src={SIX} alt="six" />
+        </button>
+      </div>
     </div>
   );
 };
