@@ -8,31 +8,52 @@ const rangeTextValues = {
   5: 'Extremely satisfied',
 };
 
-const Modal = () => {
-  const [value, setValue] = useState(0);
-  const [rating, setRating] = useState('');
+const Modal = ({ onSubmit, setClicks }) => {
+  const [value, setValue] = useState(1);
+  const [valueText, setValueText] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(value);
-    console.log(rating);
+    onSubmit({ rating: value });
+    setClicks(0);
   };
 
   useEffect(() => {
-    setRating(rangeTextValues[value]);
+    setValueText(rangeTextValues[value]);
   }, [value]);
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="range"
-          min="1"
-          max="5"
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-        />
-        <div>{rating}</div>
+    <div
+      style={{
+        zIndex: 100,
+        backgroundColor: 'AntiqueWhite',
+        width: 500,
+        height: 200,
+        position: 'absolute',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <input
+            type="range"
+            min="1"
+            max="5"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+          />
+          <p style={{ width: 160, marginLeft: 10 }}>{valueText}</p>
+        </div>
         <button type="submit">Submit</button>
       </form>
     </div>
