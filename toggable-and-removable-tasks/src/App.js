@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import TasksAndSubtasks from './TasksAndSubtasks';
 
 const TASKS = [
   {
@@ -22,7 +23,9 @@ function App() {
     <div
       style={{
         display: 'flex',
+        flexDirection: 'column',
         justifyContent: 'center',
+        alignItems: 'center',
         marginTop: 30,
       }}
     >
@@ -30,9 +33,5 @@ function App() {
     </div>
   );
 }
-
-const TasksAndSubtasks = ({ taskArray, setTaskArray }) => {
-  // YOUR CODE HERE
-};
 
 export default App;
